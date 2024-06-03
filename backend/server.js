@@ -5,9 +5,13 @@ const passportConfig = require("./lib/passportConfig");
 const cors = require("cors");
 const fs = require("fs");
 
+// Load environment variables from .env file
+require('dotenv').config();
+
 // MongoDB
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/jobPortal";
 mongoose
-  .connect("mongodb://localhost:27017/jobPortal", {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -16,7 +20,7 @@ mongoose
   .then((res) => console.log("Connected to DB"))
   .catch((err) => console.log(err));
 
-// initialising directories
+// Initialising directories
 if (!fs.existsSync("./public")) {
   fs.mkdirSync("./public");
 }
@@ -28,7 +32,7 @@ if (!fs.existsSync("./public/profile")) {
 }
 
 const app = express();
-const port = 4444;
+const port = process.env.PORT || 4444;
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
