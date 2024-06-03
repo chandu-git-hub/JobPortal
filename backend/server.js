@@ -9,13 +9,12 @@ const fs = require("fs");
 require('dotenv').config();
 
 // MongoDB
-const mongoURI = process.env.mongo_URI;
+const mongoURI = process.env.MONGO_URI;
+console.log(mongoURI);
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
   })
   .then((res) => console.log("Connected to DB"))
   .catch((err) => console.log(err));
