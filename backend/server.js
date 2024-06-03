@@ -9,7 +9,7 @@ const fs = require("fs");
 require('dotenv').config();
 
 // MongoDB
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/jobPortal";
+const mongoURI = process.env.mongo_URI;
 mongoose
   .connect(mongoURI, {
     useNewUrlParser: true,
